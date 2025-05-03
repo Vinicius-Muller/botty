@@ -1,27 +1,44 @@
 package botty.botty;
 
+import botty.botty.ui.TextField.TextInputField;
+import botty.botty.ui.label.Title;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 
 public class Main extends Application {
+  private static VBox layout() {
+    VBox layout = new VBox(10);
+    layout.setAlignment(javafx.geometry.Pos.BOTTOM_CENTER);
+    layout.setPadding(new Insets(20));
+    layout.setStyle("-fx-background-color: white;");
+    return layout;
+  }
 
-    @Override
-    public void start(Stage primaryStage) {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter text here");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 400, 300);
+  @Override
+  public void start(Stage primaryStage) {
+    Title title = new Title();
+    TextInputField textField = new TextInputField();
 
-        primaryStage.setTitle("JavaFX App");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+    VBox layout = layout();
+    layout.getChildren().addAll(title, textField);
+    layout.requestFocus();
+    /* user this do delete the title */
+    layout.getChildren().remove(0);
+    Scene scene = new Scene(layout, 400, 300);
 
-    public static void main(String[] args) {
-        launch();
-    }
+    primaryStage.setTitle("JavaFX App");
+    primaryStage.setScene(scene);
+    primaryStage.show();
+  }
+
+  public static void renderText(String text) {
+    System.out.println("Entered text: " + text);
+  }
+
+  public static void main(String[] args) {
+    launch();
+  }
 }
