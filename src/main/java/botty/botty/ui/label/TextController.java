@@ -10,9 +10,9 @@ public class TextController extends StackPane {
   Text text;
 
   public TextController(String textContent, String kind, byte size) {
-    int[] styles = Enums.getStyle(kind);
+    String styles = Enums.getStyle(kind);
 
-    text = new Text(styles[0], styles[1], textContent);
+    text = new Text(textContent);
     text.setWrappingWidth(550);
     text.setFont(Font.font("Arial", FontWeight.NORMAL, size));
 
