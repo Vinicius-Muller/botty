@@ -1,7 +1,7 @@
-package botty.botty;
+package botty;
 
-import botty.botty.ui.TextField.TextInputField;
-import botty.botty.ui.label.TextController;
+import botty.ui.TextField.TextInputField;
+import botty.ui.label.TextController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -32,15 +32,15 @@ public class Main extends Application {
     Scene scene = new Scene(scrollPane, 600, 500);
 
     primaryStage.setScene(scene);
-    primaryStage.setTitle("JavaFX App");
+    primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
 
-  public static void renderText(String text) {
+  public static void renderTextUsingMainLayout(String text) {
     TextController textMessage = new TextController(text, "TEXT", (byte) 20);
-
     javafx.scene.control.Button copyButton = new javafx.scene.control.Button("Copy");
+
     copyButton.setOnAction(event -> {
       javafx.scene.input.Clipboard clipboard = javafx.scene.input.Clipboard.getSystemClipboard();
       javafx.scene.input.ClipboardContent content = new javafx.scene.input.ClipboardContent();
@@ -50,6 +50,7 @@ public class Main extends Application {
 
     VBox textContainer = new VBox(5);
     textContainer.setAlignment(javafx.geometry.Pos.CENTER);
+
     textMessage.setMaxWidth(550);
     textContainer.getChildren().addAll(textMessage, copyButton);
 
