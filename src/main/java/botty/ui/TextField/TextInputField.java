@@ -1,15 +1,15 @@
 package botty.ui.TextField;
 
-import botty.Main;
+import botty.ui.commons.LayoutContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.TextArea;
 
 public class TextInputField extends StackPane {
-  TextArea textArea;
-
-  public TextInputField() {
+  private TextArea textArea;
+  
+  public TextInputField(String placeholder) {
     textArea = new TextArea();
-    textArea.setPromptText("Enter text here");
+    textArea.setPromptText(placeholder);
     textArea.setStyle(
         "-fx-background-color:rgb(255, 254, 254); " +
             "-fx-border-color: transparent; " +
@@ -35,7 +35,7 @@ public class TextInputField extends StackPane {
     textArea.setOnKeyPressed(event -> {
       if (event.getCode().toString().equals("ENTER")) {
         String textValue = textArea.getText();
-        Main.renderTextUsingMainLayout(textValue);
+        LayoutContext.renderTextUsingMainLayout(textValue);
         textArea.clear();
       }
     });
