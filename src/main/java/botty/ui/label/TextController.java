@@ -10,9 +10,9 @@ public class TextController extends StackPane {
 
   public TextController(String textContent, String kind, byte size) {
     text = new Text(textContent);
-    text.setWrappingWidth(550);
     text.setFont(Font.font("Arial", FontWeight.NORMAL, size));
 
+    setAlignment(text, javafx.geometry.Pos.CENTER);
     getChildren().add(text);
   }
 }
