@@ -13,7 +13,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     LayoutContext.initializeLayoutContext();
-    TextController title = new TextController(Placeholders.TITLE.getText(), Kinds.TITLE.getKindValue(), (byte) 30);
+    TextController title = new TextController(Placeholders.TITLE.getText(), Kinds.TITLE.getKindValue(), (byte) 15);
     TextInputField textField = new TextInputField(Placeholders.TRANSLATORTEXTFIELD.getText());
     
     LayoutContext.getLayoutContext().getChildren().addAll(title, textField);
