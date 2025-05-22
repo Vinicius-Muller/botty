@@ -2,7 +2,8 @@ package botty.enums;
 
 public enum Placeholders {
   TITLE("How can I help you today ?"),
-  TRANSLATORTEXTFIELD("Type your text here");
+  TRANSLATORTEXTFIELD("Type your text here"),
+  SENDBTN("Send");
 
   private final String text;
 
