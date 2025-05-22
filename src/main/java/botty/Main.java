@@ -3,7 +3,7 @@ package botty;
 import botty.enums.Kinds;
 import botty.enums.Placeholders;
 import botty.ui.TextField.TextInputField;
-import botty.ui.buttons.ButtonFactory;
+import botty.ui.buttons.SendButton;
 import botty.ui.commons.LayoutContext;
 import botty.ui.label.TextController;
 import javafx.application.Application;
@@ -17,9 +17,10 @@ public class Main extends Application {
 
     TextController title = new TextController(Placeholders.TITLE.getText(), Kinds.TITLE.getKindValue(), (byte) 15);
     TextInputField textField = new TextInputField(Placeholders.TRANSLATORTEXTFIELD.getText());
-    ButtonFactory sendButton = new ButtonFactory(null);
+    SendButton sendButton = new SendButton();
 
     javafx.scene.layout.HBox inputBox = new javafx.scene.layout.HBox(10, textField, sendButton);
+
     LayoutContext.getLayoutContext().getChildren().addAll(title, inputBox);
     javafx.scene.control.ScrollPane scrollPane = new javafx.scene.control.ScrollPane(LayoutContext.getLayoutContext());
 
@@ -27,7 +28,6 @@ public class Main extends Application {
     scrollPane.setFitToHeight(true);
     Scene scene = new Scene(scrollPane, 600, 500);
 
-    primaryStage.setScene(scene);
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
     primaryStage.show();
