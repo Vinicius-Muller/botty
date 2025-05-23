@@ -18,11 +18,11 @@ public class SendButton extends StackPane {
   private final void getStyles() {
     this.sendButton.getButton().setPrefWidth(40);
     this.sendButton.getButton().setPrefHeight(40);
-    this.sendButton.getButton().setStyle("-fx-background-color: #90ee90; -fx-background-radius: 40;");
+    this.sendButton.getButton().setStyle("-fx-background-color:rgb(0, 0, 0); -fx-background-radius: 40;");
 
     javafx.scene.control.Label iconLabel = new javafx.scene.control.Label("\u2191");
-    iconLabel.setStyle("-fx-font-size: 18px;");
-
+    iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+    iconLabel.setTextFill(javafx.scene.paint.Color.WHITE);
     this.sendButton.getButton().setGraphic(iconLabel);
   }
 

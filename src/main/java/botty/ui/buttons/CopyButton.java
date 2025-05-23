@@ -29,10 +29,15 @@ public class CopyButton extends StackPane {
   public final void setStyles() {
     this.copyButton.getButton().setPrefWidth(25);
     this.copyButton.getButton().setPrefHeight(25);
-    this.copyButton.getButton().setStyle("-fx-background-color:rgb(82, 122, 231); -fx-background-radius: 25;");
+    this.copyButton.getButton().setStyle(
+        "-fx-background-color: rgb(255, 255, 255); " +
+            "-fx-background-radius: 100; " +
+            "-fx-border-color: black; " +
+            "-fx-border-width: 2; " +
+            "-fx-border-radius: 100;");
 
     javafx.scene.control.Label iconLabel = new javafx.scene.control.Label("\uD83D\uDCCB");
-    iconLabel.setTextFill(javafx.scene.paint.Color.WHITE);
+    iconLabel.setTextFill(javafx.scene.paint.Color.BLACK);
     iconLabel.setStyle("-fx-font-size: 10px;");
 
     StackPane iconPane = new StackPane(iconLabel);

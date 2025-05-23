@@ -12,10 +12,6 @@ public class LayoutContext {
   public static void initializeLayoutContext() {
     layout = new VBox(10);
     layout.setPadding(new Insets(20));
-    layout.setStyle(
-        "-fx-border-width: 0 0 0 8;" +
-            "-fx-border-color: transparent transparent transparent #90ee90;" +
-            "-fx-background-color: white;");
     layout.setAlignment(javafx.geometry.Pos.BOTTOM_CENTER);
   }
 

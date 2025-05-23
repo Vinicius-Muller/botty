@@ -19,7 +19,6 @@ public class TextInputField extends StackPane {
   }
 
   private final void getStyles() {
-    textArea.setPrefWidth(500);
     textArea.setStyle(
         "-fx-background-color:rgb(255, 254, 254); " +
             "-fx-border-color: transparent; " +
