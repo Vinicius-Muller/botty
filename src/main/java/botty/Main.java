@@ -1,11 +1,10 @@
 package botty;
 
-import botty.enums.Kinds;
 import botty.enums.Placeholders;
 import botty.ui.TextField.TextInputField;
 import botty.ui.buttons.SendButton;
 import botty.ui.commons.LayoutContext;
-import botty.ui.label.TextController;
+import botty.ui.text.TitleText;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -23,16 +22,18 @@ public class Main extends Application {
   }
 
   private final static void renderUiElements() {
-    TextController title = new TextController(Placeholders.TITLE.getText(), Kinds.TITLE.getKindValue(), (byte) 15);
     TextInputField textField = new TextInputField(Placeholders.TRANSLATORTEXTFIELD.getText());
+    HBox.setHgrow(textField, Priority.ALWAYS);
+
     SendButton sendButton = new SendButton();
 
     javafx.scene.layout.HBox inputBox = new javafx.scene.layout.HBox(10, textField, sendButton);
     inputBox.setPrefWidth(Double.MAX_VALUE);
-    HBox.setHgrow(textField, Priority.ALWAYS);
+    inputBox.setMaxWidth(600);
     textField.prefWidthProperty().bind(inputBox.widthProperty().multiply(0.8));
     sendButton.setPrefWidth(60);
-    LayoutContext.getLayoutContext().getChildren().addAll(title, inputBox);
+
+    LayoutContext.getLayoutContext().getChildren().addAll(TitleText.getTitleComponent(), inputBox);
   }
 
   private final static void renderUiContext(Stage primaryStage) {
@@ -44,6 +45,7 @@ public class Main extends Application {
 
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
+    primaryStage.getScene().getRoot().setStyle("-fx-background-color: white;");
     primaryStage.show();
   }
 

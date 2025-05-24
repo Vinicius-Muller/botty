@@ -1,8 +1,5 @@
 package botty.ui.commons;
 
-import botty.enums.Kinds;
-import botty.ui.buttons.CopyButton;
-import botty.ui.label.TextController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 
@@ -13,23 +10,10 @@ public class LayoutContext {
     layout = new VBox(10);
     layout.setPadding(new Insets(20));
     layout.setAlignment(javafx.geometry.Pos.BOTTOM_CENTER);
+    layout.setStyle("-fx-background-color: white;");
   }
 
   public static VBox getLayoutContext() {
     return layout;
-  }
-
-  public static final void renderTextUsingMainLayout(String text) {
-    TextController textMessage = new TextController(text, Kinds.TEXT.getKindValue(), (byte) 15);
-    CopyButton copyButton = new CopyButton(text);
-
-    VBox textContainer = new VBox(5);
-    textContainer.setAlignment(javafx.geometry.Pos.CENTER);
-    VBox.setMargin(textContainer, new Insets(10));
-
-    textMessage.setMaxWidth(550);
-    textContainer.getChildren().addAll(textMessage, copyButton);
-
-    layout.getChildren().add(0, textContainer);
   }
 }

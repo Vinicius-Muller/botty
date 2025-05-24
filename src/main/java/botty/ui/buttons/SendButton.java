@@ -10,6 +10,7 @@ public class SendButton extends StackPane {
     this.sendButton = new ButtonFactory(null);
 
     getStyles();
+
     setActions();
 
     getChildren().add(this.sendButton);

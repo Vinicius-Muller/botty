@@ -1,6 +1,10 @@
 package botty.ui.TextField;
 
-import botty.ui.commons.LayoutContext;
+import java.util.List;
+
+import botty.ai.ChatPost;
+import botty.ui.text.ResponseText;
+import botty.ui.text.UserText;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.TextArea;
 
@@ -57,7 +61,15 @@ public class TextInputField extends StackPane {
   }
 
   public static final void sendText(String textValue) {
-    LayoutContext.renderTextUsingMainLayout(textValue);
-    textArea.clear();
+    UserText.renderUserText(textValue);
+
+    new Thread(() -> {
+      String apiResponse = ChatPost.getChatResponse(textValue, List.of());
+      javafx.application.Platform.runLater(() -> {
+        ResponseText.renderResponseText(apiResponse);
+      });
+    }).start();
+
+    javafx.application.Platform.runLater(() -> textArea.clear());
   }
 }
