@@ -1,7 +1,5 @@
 package botty.ui.TextField;
 
-import java.util.List;
-
 import botty.ai.ChatPost;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
@@ -56,20 +54,35 @@ public class TextInputField extends StackPane {
     });
   }
 
+  public static final void sendText(String textValue) {
+    try {
+      renderUserText(textValue);
+      startNewThreadToSendChatText(textValue);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static final void renderUserText(String textValue) {
+    UserText.renderUserText(textValue);
+    javafx.application.Platform.runLater(() -> textArea.clear());
+  }
+
+  private static final void startNewThreadToSendChatText(String textValue) {
+    new Thread(() -> {
+      try {
+        String apiResponse = ChatPost.getChatResponse(textValue);
+        javafx.application.Platform.runLater(() -> {
+          ResponseText.renderResponseText(apiResponse);
+        });
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }).start();
+  }
+
   public static final String getText() {
     return textArea.getText();
   }
 
-  public static final void sendText(String textValue) {
-    UserText.renderUserText(textValue);
-
-    new Thread(() -> {
-      String apiResponse = ChatPost.getChatResponse(textValue, List.of());
-      javafx.application.Platform.runLater(() -> {
-        ResponseText.renderResponseText(apiResponse);
-      });
-    }).start();
-
-    javafx.application.Platform.runLater(() -> textArea.clear());
-  }
 }

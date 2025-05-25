@@ -1,5 +1,6 @@
 package botty;
 
+import botty.ai.ChatPost;
 import botty.enums.Placeholders;
 import botty.ui.TextField.TextInputField;
 import botty.ui.buttons.SendButton;
@@ -17,8 +18,9 @@ public class Main extends Application {
     LayoutContext.initializeLayoutContext();
 
     renderUiElements();
-
     renderUiContext(primaryStage);
+
+    ChatPost.setCohereEntity();
   }
 
   private final static void renderUiElements() {
@@ -41,7 +43,7 @@ public class Main extends Application {
 
     scrollPane.setFitToWidth(true);
     scrollPane.setFitToHeight(true);
-    Scene scene = new Scene(scrollPane, 600, 500);
+    Scene scene = new Scene(scrollPane, 1000, 800);
 
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);

@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 
 public class ResponseText extends StackPane {
   private static Text text;
+  private static VBox textContainer;
 
   public static Text getResponseTextComponent() {
     return text;
@@ -49,12 +50,16 @@ public class ResponseText extends StackPane {
   }
 
   private static final void createTextContainer(Text textMessage, CopyButton copyButton) {
-    VBox textContainer = new VBox(5);
+    textContainer = new VBox(5);
     textContainer.setAlignment(javafx.geometry.Pos.CENTER);
 
     VBox.setMargin(textContainer, new Insets(10));
     textContainer.getChildren().addAll(textMessage, copyButton);
 
     LayoutContext.getLayoutContext().getChildren().add(0, textContainer);
+  }
+
+  public static final VBox getTextContainer() {
+    return textContainer;
   }
 }

@@ -1,24 +1,43 @@
 package botty.ai;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.cohere.api.Cohere;
 import com.cohere.api.requests.ChatRequest;
-import com.cohere.api.types.Message;
 import com.cohere.api.types.NonStreamedChatResponse;
 
 public class ChatPost {
-  public static String getChatResponse(String userMessage, List<Message> history) {
-    Cohere cohere = Cohere.builder()
+  private static Cohere cohere;
+  private static NonStreamedChatResponse response;
+  private static final List<String> history = new ArrayList<>();
+
+  public static final String getChatResponse(String userMessage) {
+    setHistory(userMessage);
+
+    handleChatResponse(userMessage);
+
+    return response.getText();
+  }
+
+  public static final void setHistory(String userMessage) {
+    history.add(userMessage);
+  }
+
+  public static final void setCohereEntity() {
+    cohere = Cohere.builder()
         .token("your cohere token")
         .clientName("snippet")
         .build();
+  }
 
-    NonStreamedChatResponse response = cohere.chat(
+  private static final void handleChatResponse(String userMessage) {
+    response = cohere.chat(
         ChatRequest.builder()
             .message(userMessage)
-            .chatHistory(history)
             .build());
+  }
 
-    return response.getText();
+  public static final List<String> getHistory() {
+    return history;
   }
 }
