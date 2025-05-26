@@ -20,36 +20,40 @@ public class TextInputField extends StackPane {
   public static final void renderTextField() {
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
-    
+
     setStyles();
     setActions();
-    
+
     createAnchorPosition();
     createInputBox();
   }
 
- private static final void createInputBox() {
-  textArea = new TextArea();
-  textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
-  textArea.setPrefHeight(80);
-  HBox.setHgrow(textArea, Priority.ALWAYS);
+  private static final void createInputBox() {
+    textArea = new TextArea();
+    textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
+    textArea.setPrefHeight(80);
+    HBox.setHgrow(textArea, Priority.ALWAYS);
 
-  SendButton sendButton = new SendButton();
+    SendButton sendButton = new SendButton();
 
-  inputBox = new HBox(textArea, sendButton);
-  inputBox.setPadding(new Insets(20));
-  inputBox.setMaxHeight(100);
-  inputBox.setSpacing(10);
-  inputBox.setMaxWidth(Double.MAX_VALUE);
+    inputBox = new HBox(textArea, sendButton);
+    inputBox.setPadding(new Insets(20));
+    inputBox.setMaxHeight(100);
+    inputBox.setSpacing(10);
+    inputBox.setMaxWidth(800);
+    inputBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-  AnchorPane.setBottomAnchor(inputBox, 10.0);
-  AnchorPane.setLeftAnchor(inputBox, 0.0);
-  AnchorPane.setRightAnchor(inputBox, 0.0);
+    StackPane centeringWrapper = new StackPane(inputBox);
+    centeringWrapper.setPrefWidth(Double.MAX_VALUE);
+    StackPane.setAlignment(inputBox, javafx.geometry.Pos.CENTER);
 
-  anchorPosition.getChildren().add(inputBox);
-}
+    AnchorPane.setBottomAnchor(centeringWrapper, 10.0);
+    AnchorPane.setLeftAnchor(centeringWrapper, 0.0);
+    AnchorPane.setRightAnchor(centeringWrapper, 0.0);
 
-  
+    anchorPosition.getChildren().add(centeringWrapper);
+  }
+
   private static final void setStyles() {
     textArea.setStyle(
         "-fx-background-color:rgb(255, 254, 254); " +
