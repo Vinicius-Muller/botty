@@ -25,7 +25,7 @@ public class ChatPost {
 
   public static final void setCohereEntity() {
     cohere = Cohere.builder()
-        .token("your cohere token")
+        .token()
         .clientName("snippet")
         .build();
   }

@@ -29,24 +29,24 @@ public class TextInputField extends StackPane {
   }
 
  private static final void createInputBox() {
-    textArea = new TextArea();
-    textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
-    textArea.setPrefHeight(80);
-    HBox.setHgrow(textArea, Priority.ALWAYS);
+  textArea = new TextArea();
+  textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
+  textArea.setPrefHeight(80);
+  HBox.setHgrow(textArea, Priority.ALWAYS);
 
-    SendButton sendButton = new SendButton();
+  SendButton sendButton = new SendButton();
 
-    inputBox = new HBox(textArea, sendButton);
-    inputBox.setPadding(new Insets(20));
-    inputBox.setMaxHeight(100);
-    inputBox.setSpacing(10);
-    inputBox.setMaxWidth(Double.MAX_VALUE);
+  inputBox = new HBox(textArea, sendButton);
+  inputBox.setPadding(new Insets(20));
+  inputBox.setMaxHeight(100);
+  inputBox.setSpacing(10);
+  inputBox.setMaxWidth(Double.MAX_VALUE);
 
-    AnchorPane.setBottomAnchor(inputBox, 0.0);
-    AnchorPane.setLeftAnchor(inputBox, 0.0);
-    AnchorPane.setRightAnchor(inputBox, 0.0);
+  AnchorPane.setBottomAnchor(inputBox, 10.0);
+  AnchorPane.setLeftAnchor(inputBox, 0.0);
+  AnchorPane.setRightAnchor(inputBox, 0.0);
 
-    anchorPosition.getChildren().add(inputBox);
+  anchorPosition.getChildren().add(inputBox);
 }
 
   
@@ -120,6 +120,10 @@ public class TextInputField extends StackPane {
 
   public static final AnchorPane getTexfieldAnchor() {
     return anchorPosition;
+  }
+
+  public static final HBox getInputBox() {
+    return inputBox;
   }
 
   public static final String getText() {
