@@ -1,26 +1,56 @@
 package botty.ui.TextField;
 
 import botty.ai.ChatPost;
+import botty.enums.Placeholders;
+import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 
 public class TextInputField extends StackPane {
   private static TextArea textArea;
+  private static HBox inputBox;
+  private static AnchorPane anchorPosition;
 
-  public TextInputField(String placeholder) {
+  public static final void renderTextField() {
     textArea = new TextArea();
-    textArea.setPromptText(placeholder);
-
-    getStyles();
-
+    textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
+    
+    setStyles();
     setActions();
-
-    getChildren().add(textArea);
+    
+    createAnchorPosition();
+    createInputBox();
   }
 
-  private final void getStyles() {
+ private static final void createInputBox() {
+    textArea = new TextArea();
+    textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
+    textArea.setPrefHeight(80);
+    HBox.setHgrow(textArea, Priority.ALWAYS);
+
+    SendButton sendButton = new SendButton();
+
+    inputBox = new HBox(textArea, sendButton);
+    inputBox.setPadding(new Insets(20));
+    inputBox.setMaxHeight(100);
+    inputBox.setSpacing(10);
+    inputBox.setMaxWidth(Double.MAX_VALUE);
+
+    AnchorPane.setBottomAnchor(inputBox, 0.0);
+    AnchorPane.setLeftAnchor(inputBox, 0.0);
+    AnchorPane.setRightAnchor(inputBox, 0.0);
+
+    anchorPosition.getChildren().add(inputBox);
+}
+
+  
+  private static final void setStyles() {
     textArea.setStyle(
         "-fx-background-color:rgb(255, 254, 254); " +
             "-fx-border-color: transparent; " +
@@ -45,13 +75,20 @@ public class TextInputField extends StackPane {
     textArea.setStyle(textArea.getStyle() + " -fx-text-alignment: center; -fx-alignment: center;");
   }
 
-  private final void setActions() {
+  private static final void setActions() {
     textArea.setOnKeyPressed(event -> {
       if (event.getCode().toString().equals("ENTER")) {
 
         sendText(getText());
       }
     });
+  }
+
+  private static final void createAnchorPosition() {
+    anchorPosition = new AnchorPane();
+
+    AnchorPane.setBottomAnchor(anchorPosition, 10.0);
+    AnchorPane.setLeftAnchor(anchorPosition, 20.0);
   }
 
   public static final void sendText(String textValue) {
@@ -79,6 +116,10 @@ public class TextInputField extends StackPane {
         e.printStackTrace();
       }
     }).start();
+  }
+
+  public static final AnchorPane getTexfieldAnchor() {
+    return anchorPosition;
   }
 
   public static final String getText() {
