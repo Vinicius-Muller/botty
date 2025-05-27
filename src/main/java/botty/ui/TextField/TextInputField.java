@@ -2,6 +2,7 @@ package botty.ui.TextField;
 
 import botty.ai.ChatPost;
 import botty.enums.Placeholders;
+import botty.ui.buttons.AudioButton;
 import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
@@ -9,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 
@@ -22,21 +24,24 @@ public class TextInputField extends StackPane {
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
     setStyles();
-    setActions();
-
     createAnchorPosition();
     createInputBox();
   }
 
   private static final void createInputBox() {
+    /* refacture this code */
+    VBox textAreaContainer = new VBox();
+    textAreaContainer.setSpacing(10);
+
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
-    textArea.setPrefHeight(80);
-    HBox.setHgrow(textArea, Priority.ALWAYS);
 
+    textAreaContainer.getChildren().addAll(textArea, createAudioButton());
+
+    HBox.setHgrow(textAreaContainer, Priority.ALWAYS);
     SendButton sendButton = new SendButton();
 
-    inputBox = new HBox(textArea, sendButton);
+    inputBox = new HBox(textAreaContainer, sendButton);
     inputBox.setPadding(new Insets(20));
     inputBox.setMaxHeight(100);
     inputBox.setSpacing(10);
@@ -51,7 +56,13 @@ public class TextInputField extends StackPane {
     AnchorPane.setLeftAnchor(centeringWrapper, 0.0);
     AnchorPane.setRightAnchor(centeringWrapper, 0.0);
 
-    anchorPosition.getChildren().add(centeringWrapper);
+    anchorPosition.getChildren().addAll(centeringWrapper);
+  }
+
+  private static final AudioButton createAudioButton() {
+    AudioButton audioButton = new AudioButton();
+
+    return audioButton;
   }
 
   private static final void setStyles() {
@@ -77,15 +88,6 @@ public class TextInputField extends StackPane {
         " -fx-prompt-text-fill: rgb(226, 226, 230);");
     textArea.setPrefColumnCount(1);
     textArea.setStyle(textArea.getStyle() + " -fx-text-alignment: center; -fx-alignment: center;");
-  }
-
-  private static final void setActions() {
-    textArea.setOnKeyPressed(event -> {
-      if (event.getCode().toString().equals("ENTER")) {
-
-        sendText(getText());
-      }
-    });
   }
 
   private static final void createAnchorPosition() {
