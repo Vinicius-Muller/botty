@@ -24,9 +24,8 @@ public class Main extends Application {
   }
 
   private final static void renderUiElements() {
-    TextInputField.renderTextField();
     LayoutContext.getLayoutContext().getChildren().addAll(TitleText.getTitleComponent(),
-        TextInputField.getTexfieldAnchor());
+        TextInputField.getTexfieldAnchor(), /* add the controls here */);
   }
 
   private final static void renderUiContext(Stage primaryStage) {

@@ -2,7 +2,6 @@ package botty.ui.TextField;
 
 import botty.ai.ChatPost;
 import botty.enums.Placeholders;
-import botty.ui.buttons.AudioButton;
 import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
@@ -29,16 +28,13 @@ public class TextInputField extends StackPane {
   }
 
   private static final void createInputBox() {
-    /* refacture this code */
-    VBox textAreaContainer = new VBox();
-    textAreaContainer.setSpacing(10);
-
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
-    textAreaContainer.getChildren().addAll(textArea, createAudioButton());
-
+    VBox textAreaContainer = new VBox(textArea);
+    textAreaContainer.setSpacing(10);
     HBox.setHgrow(textAreaContainer, Priority.ALWAYS);
+
     SendButton sendButton = new SendButton();
 
     inputBox = new HBox(textAreaContainer, sendButton);
@@ -57,12 +53,6 @@ public class TextInputField extends StackPane {
     AnchorPane.setRightAnchor(centeringWrapper, 0.0);
 
     anchorPosition.getChildren().addAll(centeringWrapper);
-  }
-
-  private static final AudioButton createAudioButton() {
-    AudioButton audioButton = new AudioButton();
-
-    return audioButton;
   }
 
   private static final void setStyles() {
@@ -125,6 +115,7 @@ public class TextInputField extends StackPane {
   }
 
   public static final AnchorPane getTexfieldAnchor() {
+    renderTextField();
     return anchorPosition;
   }
 
