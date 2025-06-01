@@ -2,6 +2,7 @@ package botty.ui.TextField;
 
 import botty.ai.ChatPost;
 import botty.enums.Placeholders;
+import botty.ui.actions.ChatActions;
 import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
@@ -31,15 +32,13 @@ public class TextInputField extends StackPane {
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
-    VBox textAreaContainer = new VBox(textArea);
+    VBox textAreaContainer = new VBox(textArea, ChatActions.createChatActions());
     textAreaContainer.setSpacing(10);
     HBox.setHgrow(textAreaContainer, Priority.ALWAYS);
 
-    SendButton sendButton = new SendButton();
-
-    inputBox = new HBox(textAreaContainer, sendButton);
+    inputBox = new HBox(textAreaContainer, SendButton.createSendButton());
     inputBox.setPadding(new Insets(20));
-    inputBox.setMaxHeight(100);
+    inputBox.setMaxHeight(150);
     inputBox.setSpacing(10);
     inputBox.setMaxWidth(800);
     inputBox.setAlignment(javafx.geometry.Pos.CENTER);

@@ -25,7 +25,7 @@ public class Main extends Application {
 
   private final static void renderUiElements() {
     LayoutContext.getLayoutContext().getChildren().addAll(TitleText.getTitleComponent(),
-        TextInputField.getTexfieldAnchor(), /* add the controls here */);
+        TextInputField.getTexfieldAnchor());
   }
 
   private final static void renderUiContext(Stage primaryStage) {
@@ -49,7 +49,7 @@ public class Main extends Application {
 
     root.setBottom(bottomWrapper);
 
-    Scene scene = new Scene(root, 800, 800);
+    Scene scene = new Scene(root, 600, 600);
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
     scene.getRoot().setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-padding: 0;");
