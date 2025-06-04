@@ -24,7 +24,8 @@ public class Main extends Application {
   }
 
   private final static void renderUiElements() {
-    LayoutContext.getLayoutContext().getChildren().addAll(TitleText.getTitleComponent(),
+    LayoutContext.addMultipleChilds(
+        TitleText.getTitleComponent(),
         TextInputField.getTexfieldAnchor());
   }
 

@@ -8,14 +8,10 @@ import javafx.scene.layout.VBox;
 public class ChatHistory {
   private static VBox chatHistoryBox;
 
-  public static void renderChatHistory() {
-    createChatHistoryBox();
-    LayoutContext.getLayoutContext().getChildren().add(chatHistoryBox);
-  }
-
-  private static final void createChatHistoryBox() {
+  public static final void createChatHistoryBox() {
     chatHistoryBox = new VBox(10);
     chatHistoryBox.setAlignment(Pos.TOP_LEFT);
+    LayoutContext.addChild(chatHistoryBox);
   }
 
   public static final void appendChatHistoryListInChatBox() {

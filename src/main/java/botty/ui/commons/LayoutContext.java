@@ -13,11 +13,29 @@ public class LayoutContext {
     layout.setFillWidth(true);
     layout.setAlignment(javafx.geometry.Pos.BOTTOM_CENTER);
     layout.setStyle("-fx-background-color: white;");
-  
+
     VBox.setVgrow(layout, Priority.ALWAYS);
   }
 
   public static VBox getLayoutContext() {
     return layout;
+  }
+
+  public static void addChild(javafx.scene.Node node) {
+    if (layout != null && node != null) {
+      layout.getChildren().add(node);
+    }
+  }
+
+  public static void addChildToPriorityPosition(javafx.scene.Node node) {
+    if (layout != null && node != null) {
+      layout.getChildren().add(0, node);
+    }
+  }
+
+  public static void addMultipleChilds(javafx.scene.Node... nodes) {
+    if (layout != null && nodes != null) {
+      layout.getChildren().addAll(nodes);
+    }
   }
 }

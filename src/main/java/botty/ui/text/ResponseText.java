@@ -56,7 +56,7 @@ public class ResponseText extends StackPane {
     VBox.setMargin(textContainer, new Insets(10));
     textContainer.getChildren().addAll(textMessage, copyButton);
 
-    LayoutContext.getLayoutContext().getChildren().add(0, textContainer);
+    LayoutContext.addChildToPriorityPosition(textContainer);
   }
 
   public static final VBox getTextContainer() {

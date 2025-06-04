@@ -51,6 +51,6 @@ public class UserText extends StackPane {
     VBox.setMargin(textContainer, new Insets(10));
     textContainer.getChildren().addAll(textMessage);
 
-    LayoutContext.getLayoutContext().getChildren().add(0, textContainer);
+    LayoutContext.addChildToPriorityPosition(textContainer);
   }
 }
