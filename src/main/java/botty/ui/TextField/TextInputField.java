@@ -103,12 +103,16 @@ public class TextInputField extends StackPane {
   private static final void startNewThreadToSendChatText(String textValue) {
     new Thread(() -> {
       try {
+        javafx.application.Platform.runLater(() -> ResponseText.showLoader());
+
         String apiResponse = ChatPost.getChatResponse(textValue);
         javafx.application.Platform.runLater(() -> {
           ResponseText.renderResponseText(apiResponse);
         });
       } catch (Exception e) {
         e.printStackTrace();
+      } finally {
+        javafx.application.Platform.runLater(() -> ResponseText.hideLoader());
       }
     }).start();
   }

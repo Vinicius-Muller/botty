@@ -3,11 +3,13 @@ package botty.ui.text;
 import botty.ui.buttons.CopyButton;
 import botty.ui.commons.LayoutContext;
 import javafx.geometry.Insets;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.Node;
 
 public class ResponseText extends StackPane {
   private static Text text;
@@ -61,5 +63,23 @@ public class ResponseText extends StackPane {
 
   public static final VBox getTextContainer() {
     return textContainer;
+  }
+
+  public static final void showLoader() {
+    ProgressIndicator loader = new ProgressIndicator();
+    loader.setStyle("-fx-progress-color: black;");
+    loader.setPrefSize(30, 30);
+    LayoutContext.addChildToPriorityPosition(loader);
+  }
+
+  public static final void hideLoader() {
+    Node previousLoader = LayoutContext.getLayoutNode(1);
+    if (previousLoader != null) {
+      if (previousLoader instanceof ProgressIndicator) {
+        int loaderIndex = LayoutContext.getLayoutNodeIndex(previousLoader);
+        LayoutContext.deleteLayoutNode(loaderIndex);
+      }
+      return;
+    }
   }
 }

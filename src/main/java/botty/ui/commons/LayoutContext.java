@@ -1,6 +1,7 @@
 package botty.ui.commons;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -37,5 +38,20 @@ public class LayoutContext {
     if (layout != null && nodes != null) {
       layout.getChildren().addAll(nodes);
     }
+  }
+
+  public static void deleteLayoutNode(int position) {
+    layout.getChildren().remove(position);
+  }
+
+  public static Node getLayoutNode(int position) {
+    return layout.getChildren().get(position);
+  }
+
+  public static int getLayoutNodeIndex(Node node) {
+    if (layout != null && node != null) {
+      return layout.getChildren().indexOf(node);
+    }
+    return -1;
   }
 }
