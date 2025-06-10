@@ -24,10 +24,11 @@ public class Main extends Application {
   }
 
   private final static void renderUiElements() {
+    TitleText mainTitle = new TitleText();
     TextInputField mainTextField = new TextInputField();
 
     LayoutContext.addMultipleChilds(
-        TitleText.getTitleComponent(),
+        mainTitle.getTitleStackPane(),
         mainTextField.getTexfieldAnchor());
   }
 
