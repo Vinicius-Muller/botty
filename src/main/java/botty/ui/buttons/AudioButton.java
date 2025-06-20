@@ -1,5 +1,6 @@
 package botty.ui.buttons;
 
+import botty.ui.TextField.TextInputField;
 import javafx.scene.layout.StackPane;
 
 public class AudioButton extends StackPane {
@@ -16,7 +17,9 @@ public class AudioButton extends StackPane {
 
   public final void setActions() {
     audioButton.getButton().setOnAction(event -> {
+      System.out.println("clicked");
 
+      TextInputField.getInputBox().setOpacity(0.4);
     });
   }
 

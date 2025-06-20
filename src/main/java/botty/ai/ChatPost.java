@@ -9,7 +9,7 @@ import com.cohere.api.types.NonStreamedChatResponse;
 public class ChatPost {
   private static Cohere cohere;
   private static NonStreamedChatResponse response;
-  private static final List<String> history = new ArrayList<>();
+  private static List<String> history = new ArrayList<>();
 
   public static final String getChatResponse(String userMessage) {
     setHistory(userMessage);
@@ -25,12 +25,12 @@ public class ChatPost {
 
   public static final void setCohereEntity() {
     cohere = Cohere.builder()
-        .token()
-        .clientName("snippet")
-        .build();
+      .token()
+      .clientName("snippet")
+      .build();
   }
 
-  private static final void handleChatResponse(String userMessage) {
+  private static void handleChatResponse(String userMessage) {
     response = cohere.chat(
         ChatRequest.builder()
             .message(userMessage)

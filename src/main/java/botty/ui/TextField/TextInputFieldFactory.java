@@ -6,13 +6,13 @@ import botty.ui.actions.ChatActions;
 import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
+import javafx.geometry.Insets;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
-import javafx.scene.control.TextArea;
 
 public class TextInputFieldFactory extends StackPane {
   private static TextArea textArea;
@@ -28,7 +28,7 @@ public class TextInputFieldFactory extends StackPane {
     createInputBox();
   }
 
-  private static final void createInputBox() {
+  private static void createInputBox() {
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
@@ -54,7 +54,7 @@ public class TextInputFieldFactory extends StackPane {
     anchorPosition.getChildren().addAll(centeringWrapper);
   }
 
-  private static final void setStyles() {
+  private static void setStyles() {
     textArea.setStyle(
         "-fx-background-color:rgb(255, 254, 254); " +
             "-fx-border-color: transparent; " +
@@ -79,28 +79,28 @@ public class TextInputFieldFactory extends StackPane {
     textArea.setStyle(textArea.getStyle() + " -fx-text-alignment: center; -fx-alignment: center;");
   }
 
-  private static final void createAnchorPosition() {
+  private static void createAnchorPosition() {
     anchorPosition = new AnchorPane();
 
     AnchorPane.setBottomAnchor(anchorPosition, 10.0);
     AnchorPane.setLeftAnchor(anchorPosition, 20.0);
   }
 
-  public static final void sendText(String textValue) {
+  public static void sendText(String textValue) {
     try {
       renderUserText(textValue);
       startNewThreadToSendChatText(textValue);
     } catch (Exception e) {
-      e.printStackTrace();
+      System.err.println("Error sending text: " + e.getMessage());
     }
   }
 
-  private static final void renderUserText(String textValue) {
+  private static void renderUserText(String textValue) {
     UserText.renderUserText(textValue);
     javafx.application.Platform.runLater(() -> textArea.clear());
   }
 
-  private static final void startNewThreadToSendChatText(String textValue) {
+  private static void startNewThreadToSendChatText(String textValue) {
     new Thread(() -> {
       try {
         javafx.application.Platform.runLater(() -> ResponseText.showLoader());
@@ -110,23 +110,23 @@ public class TextInputFieldFactory extends StackPane {
           ResponseText.renderResponseText(apiResponse);
         });
       } catch (Exception e) {
-        e.printStackTrace();
+        System.err.println("Error in the chat: " + e.getMessage());
       } finally {
         javafx.application.Platform.runLater(() -> ResponseText.hideLoader());
       }
     }).start();
   }
 
-  public final AnchorPane getTexfieldAnchor() {
+  public AnchorPane getTexfieldAnchor() {
     new TextInputFieldFactory().renderTextField();
     return anchorPosition;
   }
 
-  public static final HBox getInputBox() {
+  public static HBox getInputBox() {
     return inputBox;
   }
 
-  public static final String getText() {
+  public static String getText() {
     return textArea.getText();
   }
 
