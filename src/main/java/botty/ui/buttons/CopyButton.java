@@ -1,14 +1,15 @@
 package botty.ui.buttons;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 public class CopyButton extends StackPane {
-  private final ButtonFactory copyButton;
+  private final Button copyButton;
   private static String clipboardText;
 
   public CopyButton(String text) {
     clipboardText = text;
-    copyButton = new ButtonFactory("Copy");
+    copyButton = new Button("Copy");
 
     setStyles();
     setActions();
@@ -17,7 +18,7 @@ public class CopyButton extends StackPane {
   }
 
   public final void setActions() {
-    this.copyButton.getButton().setOnAction(event -> {
+    this.copyButton.setOnAction(event -> {
       javafx.scene.input.Clipboard clipboard = javafx.scene.input.Clipboard.getSystemClipboard();
       javafx.scene.input.ClipboardContent content = new javafx.scene.input.ClipboardContent();
 
@@ -27,7 +28,7 @@ public class CopyButton extends StackPane {
   }
 
   public final void setStyles() {
-    this.copyButton.getButton().setStyle(
+    this.copyButton.setStyle(
         "-fx-background-color: rgb(255, 255, 255); " +
             "-fx-background-radius: 100; " +
             "-fx-border-color: black; " +
@@ -42,10 +43,10 @@ public class CopyButton extends StackPane {
     iconPane.setPrefSize(20, 20);
     iconPane.setAlignment(javafx.geometry.Pos.CENTER);
 
-    this.copyButton.getButton().setGraphic(iconPane);
-    this.copyButton.getButton().setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
-    this.copyButton.getButton().setMinSize(20, 20);
-    this.copyButton.getButton().setMaxSize(20, 20);
-    this.copyButton.getButton().setPrefSize(20, 20);
+    this.copyButton.setGraphic(iconPane);
+    this.copyButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+    this.copyButton.setMinSize(20, 20);
+    this.copyButton.setMaxSize(20, 20);
+    this.copyButton.setPrefSize(20, 20);
   }
 }

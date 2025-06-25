@@ -1,12 +1,13 @@
 package botty.ui.buttons;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 public class AudioButton extends StackPane {
-  private static ButtonFactory audioButton;
+  private static Button audioButton;
 
   public AudioButton() {
-    audioButton = new ButtonFactory("Copy");
+    audioButton = new Button("Copy");
 
     setStyles();
     setActions();
@@ -15,13 +16,13 @@ public class AudioButton extends StackPane {
   }
 
   public final void setActions() {
-    audioButton.getButton().setOnAction(event -> {
-
+    audioButton.setOnAction(event -> {
+      
     });
   }
 
   public final void setStyles() {
-    audioButton.getButton().setStyle(
+    audioButton.setStyle(
         "-fx-background-color: rgb(255, 255, 255); " +
             "-fx-background-radius: 100; " +
             "-fx-border-color: black; " +
@@ -36,10 +37,10 @@ public class AudioButton extends StackPane {
     iconPane.setPrefSize(20, 20);
     iconPane.setAlignment(javafx.geometry.Pos.CENTER);
 
-    audioButton.getButton().setGraphic(iconPane);
-    audioButton.getButton().setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
-    audioButton.getButton().setMinSize(20, 20);
-    audioButton.getButton().setMaxSize(20, 20);
-    audioButton.getButton().setPrefSize(20, 20);
+    audioButton.setGraphic(iconPane);
+    audioButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+    audioButton.setMinSize(20, 20);
+    audioButton.setMaxSize(20, 20);
+    audioButton.setPrefSize(20, 20);
   }
 }

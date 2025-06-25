@@ -2,6 +2,7 @@ package botty.ai;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.cohere.api.Cohere;
 import com.cohere.api.requests.ChatRequest;
 import com.cohere.api.types.NonStreamedChatResponse;
@@ -30,7 +31,7 @@ public class ChatPost {
         .build();
   }
 
-  private static final void handleChatResponse(String userMessage) {
+  private static void handleChatResponse(String userMessage) {
     response = cohere.chat(
         ChatRequest.builder()
             .message(userMessage)
