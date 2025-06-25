@@ -23,7 +23,7 @@ public class Main extends Application {
     ChatPost.setCohereEntity();
   }
 
-  private final static void renderUiElements() {
+  private static void renderUiElements() {
     TitleText mainTitle = new TitleText();
     TextInputField mainTextField = new TextInputField();
 
@@ -32,7 +32,7 @@ public class Main extends Application {
         mainTextField.getTexfieldAnchor());
   }
 
-  private final static void renderUiContext(Stage primaryStage) {
+  private void renderUiContext(Stage primaryStage) {
     ScrollPane scrollPane = new ScrollPane(LayoutContext.getLayoutContext());
     scrollPane.setFitToWidth(true);
 
@@ -53,7 +53,7 @@ public class Main extends Application {
 
     root.setBottom(bottomWrapper);
 
-    Scene scene = new Scene(root, 600, 600);
+    Scene scene = new Scene(root, 700, 600);
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
     scene.getRoot().setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-padding: 0;");
