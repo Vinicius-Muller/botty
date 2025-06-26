@@ -5,8 +5,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class TextFactory {
-  private Text text;
-  private StackPane stackPane = new StackPane();
+  private final Text text;
+  private final StackPane stackPane = new StackPane();
 
   public TextFactory(String value, Font fontConfig) {
     text = new Text(value);

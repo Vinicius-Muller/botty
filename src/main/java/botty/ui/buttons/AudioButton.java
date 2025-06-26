@@ -1,7 +1,9 @@
 package botty.ui.buttons;
 
+import botty.ui.TextField.TextInputField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class AudioButton extends StackPane {
   private static Button audioButton;
@@ -17,7 +19,15 @@ public class AudioButton extends StackPane {
 
   public final void setActions() {
     audioButton.setOnAction(event -> {
-      
+      VBox container = TextInputField.getTextAreaContainer();
+      container.setStyle("-fx-background-color: transparent; -fx-opacity: 0.5; -fx-background-insets: 0; -fx-background-radius: 0;");
+      container.setMouseTransparent(true);
+
+      SendButton sendButton = TextInputField.getSendButton();
+      TextInputField.removeButton(sendButton);
+
+      MicrophoneButton microphoneButton = new MicrophoneButton();
+      TextInputField.addbutton(microphoneButton);
     });
   }
 

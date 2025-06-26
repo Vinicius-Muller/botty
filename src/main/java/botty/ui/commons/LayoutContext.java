@@ -22,19 +22,19 @@ public class LayoutContext {
     return layout;
   }
 
-  public static void addChild(javafx.scene.Node node) {
+  public static void addChild(Node node) {
     if (layout != null && node != null) {
       layout.getChildren().add(node);
     }
   }
 
-  public static void addChildToPriorityPosition(javafx.scene.Node node) {
+  public static void addChildToPriorityPosition(Node node) {
     if (layout != null && node != null) {
       layout.getChildren().add(0, node);
     }
   }
 
-  public static void addMultipleChilds(javafx.scene.Node... nodes) {
+  public static void addMultipleChilds(Node... nodes) {
     if (layout != null && nodes != null) {
       layout.getChildren().addAll(nodes);
     }

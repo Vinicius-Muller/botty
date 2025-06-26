@@ -7,6 +7,7 @@ import botty.ui.buttons.SendButton;
 import botty.ui.text.ResponseText;
 import botty.ui.text.UserText;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -17,7 +18,9 @@ import javafx.scene.layout.VBox;
 public class TextInputField extends StackPane {
   private static TextArea textArea;
   private static HBox inputBox;
+  private static VBox textAreaContainer;
   private static AnchorPane anchorPosition;
+  private static SendButton sendButton;
 
   public TextInputField() {
     textArea = new TextArea();
@@ -32,13 +35,12 @@ public class TextInputField extends StackPane {
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
-    VBox textAreaContainer = new VBox(textArea, ChatActions.createChatActions());
+    textAreaContainer = new VBox(textArea, ChatActions.createChatActions());
     textAreaContainer.setSpacing(10);
     HBox.setHgrow(textAreaContainer, Priority.ALWAYS);
 
-    SendButton sendbutton = new SendButton();
-
-    inputBox = new HBox(textAreaContainer, sendbutton);
+    sendButton = new SendButton();
+    inputBox = new HBox(textAreaContainer, sendButton);
     inputBox.setPadding(new Insets(20));
     inputBox.setMaxHeight(150);
     inputBox.setSpacing(10);
@@ -131,4 +133,19 @@ public class TextInputField extends StackPane {
     return textArea.getText();
   }
 
+  public static final VBox getTextAreaContainer() {
+    return textAreaContainer;
+  }
+
+  public static final SendButton getSendButton() {
+    return sendButton;
+  }
+
+  public static final void removeButton(Node button) {
+    inputBox.getChildren().remove(button);
+  }
+
+  public static final void addbutton(Node button) {
+    inputBox.getChildren().add(button);
+  }
 }
