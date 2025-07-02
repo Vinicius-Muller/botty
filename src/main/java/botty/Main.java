@@ -46,13 +46,8 @@ public class Main extends Application {
     BorderPane root = new BorderPane();
     root.setCenter(scrollPane);
 
-    HBox bottomWrapper = new HBox(TextInputField.getInputBox());
-    bottomWrapper.setAlignment(javafx.geometry.Pos.CENTER);
-    bottomWrapper.setPadding(new Insets(10));
-    bottomWrapper.setStyle("-fx-background-color: white;");
-
-    root.setBottom(bottomWrapper);
-
+    createBottomControls(root);
+    
     Scene scene = new Scene(root, 700, 600);
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
@@ -60,6 +55,14 @@ public class Main extends Application {
     primaryStage.show();
   }
 
+  public void createBottomControls(BorderPane root) {
+    HBox bottomWrapper = new HBox(TextInputField.getInputBox());
+    bottomWrapper.setAlignment(javafx.geometry.Pos.CENTER);
+    bottomWrapper.setPadding(new Insets(10));
+    bottomWrapper.setStyle("-fx-background-color: white;");
+
+    root.setBottom(bottomWrapper);
+  }
   public static void main(String[] args) {
     launch();
   }

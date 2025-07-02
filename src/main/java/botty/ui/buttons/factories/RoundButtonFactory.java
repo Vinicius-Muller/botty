@@ -19,7 +19,7 @@ public class RoundButtonFactory {
     sendButton.setPrefWidth(40);
     sendButton.setPrefHeight(40);
     StackPane.setMargin(sendButton, new Insets(0, 0, 22, 0));
-    sendButton.setStyle("-fx-background-color:rgb(0, 0, 0); -fx-background-radius: 40;");
+    sendButton.setStyle("-fx-background-color:rgb(0, 0, 0); -fx-background-radius: 40; -fx-cursor: hand;");
 
     Label iconLabel = new Label(icon);
     iconLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");

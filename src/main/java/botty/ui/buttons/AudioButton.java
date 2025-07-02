@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 
 public class AudioButton extends StackPane {
   private static Button audioButton;
-
+  
   public AudioButton() {
     audioButton = new Button("Copy");
 
