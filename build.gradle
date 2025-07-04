@@ -11,6 +11,7 @@ repositories {
 dependencies {
   implementation 'org.openjfx:javafx-controls:17'
   implementation 'com.cohere:cohere-java:+'
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
 }
 
 application {
@@ -25,11 +26,15 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-shadowJar {
-  archiveBaseName.set('botty')
-  archiveClassifier.set('')
-  archiveVersion.set('')
-  manifest {
-      attributes 'Main-Class': 'botty.Main'
-  }
+//shadowJar {
+//  archiveBaseName.set('botty')
+//  archiveClassifier.set('')
+//  archiveVersion.set('')
+//  manifest {
+//      attributes 'Main-Class': 'botty.Main'
+//  }
+//}
+
+test {
+  useJUnitPlatform()
 }
