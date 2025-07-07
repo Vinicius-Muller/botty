@@ -2,6 +2,7 @@ package botty;
 
 import botty.ai.ChatPost;
 import botty.ui.TextField.TextInputField;
+import botty.ui.buttons.factories.RoundButtonFactory;
 import botty.ui.commons.LayoutContext;
 import botty.ui.text.TitleText;
 import javafx.application.Application;
@@ -47,12 +48,20 @@ public class Main extends Application {
     root.setCenter(scrollPane);
 
     createBottomControls(root);
-    
+    createIncognitoButton(root);
+
     Scene scene = new Scene(root, 700, 600);
     primaryStage.setTitle("Botty");
     primaryStage.setScene(scene);
     scene.getRoot().setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-padding: 0;");
     primaryStage.show();
+  }
+
+  public void createIncognitoButton(BorderPane root) {
+    HBox container = new HBox(RoundButtonFactory.createButton("\uD83D\uDD12"));
+    container.setPadding(new Insets(10));
+    // set the actions to activate the incognito mode
+    root.setRight(container);
   }
 
   public void createBottomControls(BorderPane root) {
@@ -63,6 +72,7 @@ public class Main extends Application {
 
     root.setBottom(bottomWrapper);
   }
+
   public static void main(String[] args) {
     launch();
   }
