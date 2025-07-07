@@ -20,4 +20,8 @@ public class TextFactory {
   public StackPane getTitleStackPane() {
     return stackPane;
   }
+
+  public Text getText() {
+    return text;
+  }
 }
