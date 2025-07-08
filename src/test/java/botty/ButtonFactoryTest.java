@@ -27,13 +27,11 @@ public class ButtonFactoryTest extends ApplicationTest {
 
     @Test
     public void shouldRenderButton() {
-        // wait to ensure rendering
         sleep(500);
 
         assertNotNull(testButton, "Button was not initialized");
         assertTrue(testButton.isVisible(), "Button is not visible");
 
-        // Alternatively use lookup
         Button foundButton = lookup("#testButton").queryButton();
         assertNotNull(foundButton, "Button not found via lookup");
     }
