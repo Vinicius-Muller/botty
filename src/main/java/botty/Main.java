@@ -62,7 +62,9 @@ public class Main extends Application {
     IncognitoButton button = new IncognitoButton();
     HBox container = new HBox(button);
     container.setPadding(new Insets(10));
-    // set the actions to activate the incognito mode
+    container.set
+    // have to create a IncognitoButton class to handle
+    // incognito actions
     root.setRight(container);
   }
 
