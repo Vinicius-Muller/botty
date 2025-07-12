@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -49,7 +50,7 @@ public class Main extends Application {
     root.setCenter(scrollPane);
 
     createBottomControls(root);
-    createIncognitoButton(root);
+    createIncognitoButton(root, primaryStage);
 
     Scene scene = new Scene(root, 700, 600);
     primaryStage.setTitle("Botty");
@@ -58,13 +59,11 @@ public class Main extends Application {
     primaryStage.show();
   }
 
-  public void createIncognitoButton(BorderPane root) {
-    IncognitoButton button = new IncognitoButton();
-    HBox container = new HBox(button);
+  public void createIncognitoButton(BorderPane root, Stage primaryStage) {
+    IncognitoButton button = new IncognitoButton(primaryStage);
+    VBox container = new VBox(button);
     container.setPadding(new Insets(10));
-    container.set
-    // have to create a IncognitoButton class to handle
-    // incognito actions
+
     root.setRight(container);
   }
 
