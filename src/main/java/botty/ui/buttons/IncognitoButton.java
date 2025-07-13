@@ -8,7 +8,10 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef.HWND;
 import com.sun.jna.win32.StdCallLibrary;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class IncognitoButton extends StackPane {
     private final Button incognitoButton;
@@ -16,7 +19,8 @@ public class IncognitoButton extends StackPane {
     private boolean isSecure = false;
 
     public IncognitoButton(Stage primaryStage) {
-        this.incognitoButton = RoundButtonFactory.createButton("\uD83D\uDD12");
+        this.incognitoButton = RoundButtonFactory.createButton("");
+        this.setIcon();
         this.setActions(primaryStage);
 
         String os = System.getProperty("os.name").toLowerCase();
@@ -28,6 +32,13 @@ public class IncognitoButton extends StackPane {
         }
 
         getChildren().add(incognitoButton);
+    }
+
+    private void setIcon() {
+        FontIcon incognitoIcon = new FontIcon(MaterialDesign.MDI_INCOGNITO);
+        incognitoIcon.setIconSize(24);
+        incognitoIcon.setIconColor(Color.WHITE);
+        this.incognitoButton.setGraphic(incognitoIcon);
     }
 
     private void setActions(Stage primaryStage) {

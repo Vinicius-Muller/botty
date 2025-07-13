@@ -3,7 +3,6 @@ package botty;
 import botty.ai.ChatPost;
 import botty.ui.TextField.TextInputField;
 import botty.ui.buttons.IncognitoButton;
-import botty.ui.buttons.factories.RoundButtonFactory;
 import botty.ui.commons.LayoutContext;
 import botty.ui.text.TitleText;
 import javafx.application.Application;

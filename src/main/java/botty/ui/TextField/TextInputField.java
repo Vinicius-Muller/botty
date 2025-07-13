@@ -35,6 +35,7 @@ public class TextInputField extends StackPane {
     textArea = new TextArea();
     textArea.setPromptText(Placeholders.TRANSLATORTEXTFIELD.getText());
 
+
     textAreaContainer = new VBox(textArea, ChatActions.createChatActions());
     textAreaContainer.setSpacing(10);
     HBox.setHgrow(textAreaContainer, Priority.ALWAYS);
@@ -107,16 +108,16 @@ public class TextInputField extends StackPane {
   private static void startNewThreadToSendChatText(String textValue) {
     new Thread(() -> {
       try {
-        javafx.application.Platform.runLater(() -> ResponseText.showLoader());
+        javafx.application.Platform.runLater(ResponseText::showLoader);
 
         String apiResponse = ChatPost.getChatResponse(textValue);
         javafx.application.Platform.runLater(() -> {
           ResponseText.renderResponseText(apiResponse);
         });
       } catch (Exception e) {
-        System.err.println(e);
+        System.out.println(e);
       } finally {
-        javafx.application.Platform.runLater(() -> ResponseText.hideLoader());
+        javafx.application.Platform.runLater(ResponseText::hideLoader);
       }
     }).start();
   }
@@ -125,27 +126,27 @@ public class TextInputField extends StackPane {
     return anchorPosition;
   }
 
-  public static final HBox getInputBox() {
+  public static HBox getInputBox() {
     return inputBox;
   }
 
-  public static final String getText() {
+  public static String getText() {
     return textArea.getText();
   }
 
-  public static final VBox getTextAreaContainer() {
+  public static VBox getTextAreaContainer() {
     return textAreaContainer;
   }
 
-  public static final SendButton getSendButton() {
+  public static SendButton getSendButton() {
     return sendButton;
   }
 
-  public static final void removeButton(Node button) {
+  public static void removeButton(Node button) {
     inputBox.getChildren().remove(button);
   }
 
-  public static final void addbutton(Node button) {
+  public static void addbutton(Node button) {
     inputBox.getChildren().add(button);
   }
 }

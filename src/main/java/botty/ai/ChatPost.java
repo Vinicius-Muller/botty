@@ -12,7 +12,7 @@ public class ChatPost {
   private static NonStreamedChatResponse response;
   private static final List<String> history = new ArrayList<>();
 
-  public static final String getChatResponse(String userMessage) {
+  public static String getChatResponse(String userMessage) {
     setHistory(userMessage);
 
     handleChatResponse(userMessage);
@@ -20,13 +20,13 @@ public class ChatPost {
     return response.getText();
   }
 
-  public static final void setHistory(String userMessage) {
+  public static void setHistory(String userMessage) {
     history.add(userMessage);
   }
 
-  public static final void setCohereEntity() {
+  public static void setCohereEntity() {
     cohere = Cohere.builder()
-      .token()
+      .token(System.getenv("COHERE_API"))
       .clientName("snippet")
       .build();
   }
@@ -38,7 +38,7 @@ public class ChatPost {
             .build());
   }
 
-  public static final List<String> getHistory() {
+  public static List<String> getHistory() {
     return history;
   }
 }
