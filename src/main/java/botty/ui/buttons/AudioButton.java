@@ -1,6 +1,9 @@
 package botty.ui.buttons;
 
 import botty.ui.TextField.TextInputField;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -11,7 +14,8 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class AudioButton extends StackPane {
   private final Button audioButton;
-  
+  private Button closeAudioStateButton;
+
   public AudioButton() {
     this.audioButton = new Button("Copy");
 
@@ -57,25 +61,49 @@ public class AudioButton extends StackPane {
   }
 
   private void createCloseButton(HBox container) {
-    Button closeAudioStateButton = new Button();
+    this.closeAudioStateButton = new Button();
     FontIcon closeIcon = new FontIcon(MaterialDesign.MDI_CLOSE);
     closeIcon.setIconSize(10);
     closeIcon.setIconColor(Color.BLACK);
-    closeAudioStateButton.setGraphic(closeIcon);
-    closeAudioStateButton.setStyle("-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 100; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 100; -fx-cursor: hand;");
+    this.closeAudioStateButton.setGraphic(closeIcon);
+    this.closeAudioStateButton.setStyle("-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 100; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 100; -fx-cursor: hand;");
 
-    closeAudioStateButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
-    closeAudioStateButton.setMinSize(20, 20);
-    closeAudioStateButton.setMaxSize(20, 20);
-    closeAudioStateButton.setPrefSize(20, 20);
+    this.closeAudioStateButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+    this.closeAudioStateButton.setMinSize(20, 20);
+    this.closeAudioStateButton.setMaxSize(20, 20);
+    this.closeAudioStateButton.setPrefSize(20, 20);
 
-    closeAudioStateButton.setOnAction(event -> {
-      //stoped here
-      //have to remove the close button
-      //and return the send button by hidding the mic button
-      TextInputField.getSendButton().getChildren().remove(closeAudioStateButton);
+    this.closeAudioStateButton.setOnAction(event -> {
+      this.removeButtonThread.start();
+      this.removeTheVoiceStyleFromTheButton.start();
     });
 
-    container.getChildren().add(closeAudioStateButton);
+    container.getChildren().add(this.closeAudioStateButton);
   }
+
+  Thread removeButtonThread = new Thread(() -> {
+    Platform.runLater(() -> {
+      Node buttonsContainer = TextInputField.getInputBox().getChildren().get(1);
+
+      if (buttonsContainer instanceof HBox containerHBox) {
+        ObservableList<Node> children = containerHBox.getChildren();
+        if (children.size() > 1) {
+          Node closeButton = children.get(1);
+          containerHBox.getChildren().remove(closeButton);
+        }
+      }
+    });
+  });
+
+  Thread removeTheVoiceStyleFromTheButton = new Thread(() -> {
+    Platform.runLater(() -> {
+      TextInputField.getInputBox().getChildren().remove(1);
+      SendButton sendButton = new SendButton();
+      TextInputField.getInputBox().getChildren().add(sendButton);
+
+      VBox container = TextInputField.getTextAreaContainer();
+      container.setStyle("-fx-opacity: 1;");
+      container.setMouseTransparent(false);
+    });
+  });
 }
