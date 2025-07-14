@@ -14,9 +14,8 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class AudioButton extends StackPane {
   private final Button audioButton;
-  private Button closeAudioStateButton;
 
-  public AudioButton() {
+    public AudioButton() {
     this.audioButton = new Button("Copy");
 
     setStyles();
@@ -61,49 +60,46 @@ public class AudioButton extends StackPane {
   }
 
   private void createCloseButton(HBox container) {
-    this.closeAudioStateButton = new Button();
+      Button closeAudioStateButton = new Button();
     FontIcon closeIcon = new FontIcon(MaterialDesign.MDI_CLOSE);
     closeIcon.setIconSize(10);
     closeIcon.setIconColor(Color.BLACK);
-    this.closeAudioStateButton.setGraphic(closeIcon);
-    this.closeAudioStateButton.setStyle("-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 100; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 100; -fx-cursor: hand;");
+    closeAudioStateButton.setGraphic(closeIcon);
+    closeAudioStateButton.setStyle("-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 100; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 100; -fx-cursor: hand;");
 
-    this.closeAudioStateButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
-    this.closeAudioStateButton.setMinSize(20, 20);
-    this.closeAudioStateButton.setMaxSize(20, 20);
-    this.closeAudioStateButton.setPrefSize(20, 20);
+    closeAudioStateButton.setContentDisplay(javafx.scene.control.ContentDisplay.CENTER);
+    closeAudioStateButton.setMinSize(20, 20);
+    closeAudioStateButton.setMaxSize(20, 20);
+    closeAudioStateButton.setPrefSize(20, 20);
 
-    this.closeAudioStateButton.setOnAction(event -> {
-      this.removeButtonThread.start();
-      this.removeTheVoiceStyleFromTheButton.start();
-    });
-
-    container.getChildren().add(this.closeAudioStateButton);
-  }
-
-  Thread removeButtonThread = new Thread(() -> {
-    Platform.runLater(() -> {
+    closeAudioStateButton.setOnAction(event -> {
       Node buttonsContainer = TextInputField.getInputBox().getChildren().get(1);
 
-      if (buttonsContainer instanceof HBox containerHBox) {
-        ObservableList<Node> children = containerHBox.getChildren();
-        if (children.size() > 1) {
-          Node closeButton = children.get(1);
-          containerHBox.getChildren().remove(closeButton);
-        }
-      }
-    });
-  });
+      new Thread(() -> {
+        Platform.runLater(() -> {
+          if (buttonsContainer instanceof HBox containerHBox) {
+            ObservableList<Node> children = containerHBox.getChildren();
+            if (children.size() > 1) {
+              Node closeButton = children.get(1);
+              containerHBox.getChildren().remove(closeButton);
+            }
+          }
+        });
+      }).start();
 
-  Thread removeTheVoiceStyleFromTheButton = new Thread(() -> {
-    Platform.runLater(() -> {
-      TextInputField.getInputBox().getChildren().remove(1);
-      SendButton sendButton = new SendButton();
-      TextInputField.getInputBox().getChildren().add(sendButton);
+      new Thread(() -> {
+        Platform.runLater(() -> {
+          TextInputField.getInputBox().getChildren().remove(1);
+          SendButton sendButton = new SendButton();
+          TextInputField.addSendButton(sendButton);
 
-      VBox container = TextInputField.getTextAreaContainer();
-      container.setStyle("-fx-opacity: 1;");
-      container.setMouseTransparent(false);
+          VBox containerArea = TextInputField.getTextAreaContainer();
+          containerArea.setStyle("-fx-opacity: 1;");
+          containerArea.setMouseTransparent(false);
+        });
+      }).start();
     });
-  });
+
+    container.getChildren().add(closeAudioStateButton);
+  }
 }
