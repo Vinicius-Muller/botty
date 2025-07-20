@@ -35,7 +35,7 @@ public class AudioButton extends StackPane {
 
       AudioActionButton audioActionButton = new AudioActionButton();
       HBox micContainer = new HBox(audioActionButton);
-      this.createCloseButton(micContainer);
+      this.createCloseButton(micContainer, audioActionButton);
       TextInputField.addbutton(micContainer);
     });
   }
@@ -59,7 +59,7 @@ public class AudioButton extends StackPane {
     this.audioButton.setGraphic(micIcon);
   }
 
-  private void createCloseButton(HBox container) {
+  private void createCloseButton(HBox container, AudioActionButton audioActionButton) {
     FontIcon closeIcon = new FontIcon(MaterialDesign.MDI_CLOSE);
     closeIcon.setIconSize(10);
     closeIcon.setIconColor(Color.BLACK);
@@ -74,6 +74,7 @@ public class AudioButton extends StackPane {
     this.closeAudioStateButton.setOnAction(event -> {
       this.removeButton();
       this.removeTheVoiceStyleFromTheButton();
+      audioActionButton.closeRecordingState();
     });
 
     container.getChildren().add(this.closeAudioStateButton);
