@@ -74,36 +74,32 @@ public class AudioButton extends StackPane {
     this.closeAudioStateButton.setPrefSize(20, 20);
 
     this.closeAudioStateButton.setOnAction(event -> {
-      this.removeButtonThread.start();
-      this.removeTheVoiceStyleFromTheButton.start();
+      this.removeButton();
+      this.removeTheVoiceStyleFromTheButton();
     });
 
     container.getChildren().add(this.closeAudioStateButton);
   }
 
-  Thread removeButtonThread = new Thread(() -> {
-    Platform.runLater(() -> {
-      Node buttonsContainer = TextInputField.getInputBox().getChildren().get(1);
+  private void removeButton() {
+    Node buttonsContainer = TextInputField.getInputBox().getChildren().get(1);
 
-      if (buttonsContainer instanceof HBox containerHBox) {
-        ObservableList<Node> children = containerHBox.getChildren();
-        if (children.size() > 1) {
-          Node closeButton = children.get(1);
-          containerHBox.getChildren().remove(closeButton);
-        }
+    if (buttonsContainer instanceof HBox containerHBox) {
+      ObservableList<Node> children = containerHBox.getChildren();
+      if (children.size() > 1) {
+        Node closeButton = children.get(1);
+        containerHBox.getChildren().remove(closeButton);
       }
-    });
-  });
+    }
+  }
 
-  Thread removeTheVoiceStyleFromTheButton = new Thread(() -> {
-    Platform.runLater(() -> {
-      TextInputField.getInputBox().getChildren().remove(1);
-      SendButton sendButton = new SendButton();
-      TextInputField.getInputBox().getChildren().add(sendButton);
+  private void removeTheVoiceStyleFromTheButton() {
+    TextInputField.getInputBox().getChildren().remove(1);
+    SendButton sendButton = new SendButton();
+    TextInputField.addNewSendButton(sendButton);
 
-      VBox container = TextInputField.getTextAreaContainer();
-      container.setStyle("-fx-opacity: 1;");
-      container.setMouseTransparent(false);
-    });
-  });
+    VBox container = TextInputField.getTextAreaContainer();
+    container.setStyle("-fx-opacity: 1;");
+    container.setMouseTransparent(false);
+  }
 }

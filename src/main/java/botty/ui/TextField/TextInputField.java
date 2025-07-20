@@ -149,4 +149,9 @@ public class TextInputField extends StackPane {
   public static void addbutton(Node button) {
     inputBox.getChildren().add(button);
   }
+
+  public static void addNewSendButton(SendButton newButton) {
+    sendButton = newButton;
+    addbutton(sendButton);
+  }
 }
