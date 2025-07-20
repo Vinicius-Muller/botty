@@ -33,8 +33,8 @@ public class AudioButton extends StackPane {
       SendButton sendButton = TextInputField.getSendButton();
       TextInputField.removeButton(sendButton);
 
-      MicrophoneButton microphoneButton = new MicrophoneButton();
-      HBox micContainer = new HBox(microphoneButton);
+      AudioActionButton audioActionButton = new AudioActionButton();
+      HBox micContainer = new HBox(audioActionButton);
       this.createCloseButton(micContainer);
       TextInputField.addbutton(micContainer);
     });
