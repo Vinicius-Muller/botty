@@ -1,7 +1,6 @@
 package botty.ui.buttons;
 
 import botty.ui.TextField.TextInputField;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,7 +13,7 @@ import org.kordamp.ikonli.materialdesign.MaterialDesign;
 
 public class AudioButton extends StackPane {
   private final Button audioButton;
-  private Button closeAudioStateButton;
+  private final Button closeAudioStateButton = new Button();
 
   public AudioButton() {
     this.audioButton = new Button("Copy");
@@ -61,7 +60,6 @@ public class AudioButton extends StackPane {
   }
 
   private void createCloseButton(HBox container) {
-    this.closeAudioStateButton = new Button();
     FontIcon closeIcon = new FontIcon(MaterialDesign.MDI_CLOSE);
     closeIcon.setIconSize(10);
     closeIcon.setIconColor(Color.BLACK);
@@ -96,7 +94,7 @@ public class AudioButton extends StackPane {
   private void removeTheVoiceStyleFromTheButton() {
     TextInputField.getInputBox().getChildren().remove(1);
     SendButton sendButton = new SendButton();
-    TextInputField.addNewSendButton(sendButton);
+    TextInputField.addSendButton(sendButton);
 
     VBox container = TextInputField.getTextAreaContainer();
     container.setStyle("-fx-opacity: 1;");
