@@ -134,6 +134,10 @@ public class TextInputField extends StackPane {
     return textArea.getText();
   }
 
+  public static TextArea getTextArea() {
+    return textArea;
+  }
+
   public static VBox getTextAreaContainer() {
     return textAreaContainer;
   }

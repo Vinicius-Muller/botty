@@ -3,6 +3,7 @@ package botty.ui.buttons;
 import botty.ui.TextField.TextInputField;
 import botty.ui.actions.AudioParser;
 import botty.ui.buttons.factories.RoundButtonFactory;
+import com.sun.javafx.css.parser.Recognizer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
@@ -14,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
+import java.io.FileInputStream;
+import org.vosk.Model;
+import org.vosk.Recognizer;
 
 public class AudioActionButton extends StackPane {
   private final Button microphoneButton;
@@ -54,6 +58,7 @@ public class AudioActionButton extends StackPane {
     if (this.timeline != null) {
       this.resetRecordingState();
       this.audioParser.stopRecording();
+      this.getSpeechToText();
     } else {
       this.audioParser.startRecording();
       this.microphoneButton.setGraphic(iconFactory(MaterialDesign.MDI_STOP));
@@ -89,6 +94,25 @@ public class AudioActionButton extends StackPane {
     micIcon.setIconSize(24);
     micIcon.setIconColor(Color.WHITE);
     return micIcon;
+  }
+
+  private void getSpeechToText() {
+    try (Model model = new Model("model");
+         FileInputStream ais = new FileInputStream("path/to/your/file.wav")) {
+
+      Recognizer recognizer = new Recognizer(model, 16000.0f);
+      byte[] b = new byte[4096];
+      int nbytes;
+      while ((nbytes = ais.read(b)) >= 0) {
+        if (recognizer.acceptWaveForm(b, nbytes)) {
+          System.out.println(recognizer.getResult());
+        }
+      }
+      System.out.println(recognizer.getFinalResult());
+      recognizer.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public Button getMicrophoneButton() {
